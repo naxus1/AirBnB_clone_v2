@@ -24,10 +24,8 @@ class FileStorage:
         """ delete a given object
         """
         if obj is not None:
-            print("deletin")
             id_obj = obj.id
             delete = str(type(obj).__name__) + '.' +  obj.id
-            print("delete: {}".format(self.__objects[delete]))
             if delete in self.__objects.keys():
                 del self.__objects[delete]
                 self.save()
@@ -61,7 +59,6 @@ class FileStorage:
     def save(self):
         """serialize the file path to JSON file path
         """
-        print("saving")
         my_dict = {}
         for key, value in self.__objects.items():
             my_dict[key] = value.to_dict()
