@@ -13,7 +13,7 @@ class State(BaseModel, Base):
         name: input name
     """
 
-    _tablename__ = "states"
+    __tablename__ = "states"
 
     name = Column(String(128),
                   nullable=False)
