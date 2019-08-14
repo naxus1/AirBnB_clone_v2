@@ -21,4 +21,9 @@ class State(BaseModel, Base):
                           cascade="all, delete-orphan")
     @property
     def cities(self):
-        all_data = models.storage.all("City")
+        all_data = models.storage.all(models.city)
+        data_city = []
+        for key, value in all_data.items():
+            if value.state_id == self.id:
+                data_city.append(value)
+        return data_city
