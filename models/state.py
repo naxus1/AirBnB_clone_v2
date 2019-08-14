@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """This is the state class"""
+
+import models
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 
@@ -9,14 +11,14 @@ class State(BaseModel, Base):
         name: input name
     """
 
-    __tablename__ = 'states'
+    _tablename__ = "states"
 
     name = Column(String(128),
                   nullable=False)
 
-    state_id = Column(String(60),
-                      nullable=False,
-                      Foreignkey=('state_id'))
-
-    cities = relationship("City", cascade="all, delete-orphan",
-                          backref="state")
+    cities = relationship("City",
+                          backref="state",
+                          cascade="all, delete-orphan")
+    @property
+    def cities(self):
+        all_data = models.storage.all("City")
