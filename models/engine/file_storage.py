@@ -25,7 +25,7 @@ class FileStorage:
         """
         if obj is not None:
             id_obj = obj.id
-            delete = str(type(obj).__name__) + '.' +  obj.id
+            delete = str(type(obj).__name__) + '.' + obj.id
             if delete in self.__objects.keys():
                 del self.__objects[delete]
                 self.save()

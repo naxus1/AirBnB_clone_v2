@@ -15,19 +15,9 @@ class BaseModel:
     for other classes
     """
 
-    #Create id and created_at
-
-    id = Column(String(60),
-                nullable=False,
-                primary_key=True)
-
-    created_at = Column(DateTime,
-                nullable=False,
-                default=datetime.utcnow)
-
-    updated_at = Column(DateTime,
-                nullable=False,
-                default=datetime.utcnow)
+    id = Column(String(60), nullable=False, primary_key=True)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(self, *args, **kwargs):
         """Instantiation of base model class
@@ -49,7 +39,6 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
             """ models.storage.new(self)"""
-
 
     def __str__(self):
         """returns a string

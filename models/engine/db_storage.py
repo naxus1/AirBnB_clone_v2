@@ -28,18 +28,20 @@ class DBStorage():
     all_classes = [City, State]
 
     def __init__(self):
+        """ the init method to start the engine db
+        """
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
                                       format(HBNB_MYSQL_USER, HBNB_MYSQL_PWD,
                                              HBNB_MYSQL_HOST, HBNB_MYSQL_DB,
                                              pool_pre_ping=True))
-        metadata=MetaData()
+        metadata = MetaData()
         if HBNB_ENV == "test":
             metadata.drop_all(engine)
 
     def all(self, cls=None):
         """ bring all the clases from the database acoord to the cls type
         """
-        dictionary={}
+        dictionary = {}
         if cls:
             data = self.__session.query(cls).all()
             ke = cls.__name__ + "."
@@ -77,8 +79,9 @@ class DBStorage():
         """ create all tables in the database (feature of SQLAlchemy) create the
         current database session (self.__session) from the engine
         (self.__engine) by using a sessionmaker - the option expire_on_commit
-        must be set to False ; and scoped_session - to make sure your Session is
-        thread-safe
+        must be set to False ; and scoped_session - to make sure your Session
+        is thread-safe
         """
         Base.metadata.create_all(self.__engine)
-        self.__session = scoped_session(sessionmaker(bind=self.__engine, expire_on_commit=False))()
+        self.__session = scoped_session(sessionmaker(bind=self.__engine,
+                                                     expire_on_commit=False))()
