@@ -1,10 +1,15 @@
 #!/usr/bin/python3
 """This is the place class"""
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Table
 import models
 from sqlalchemy.orm import relationship
 
+place_amenity = Table('place_amenity', Base.metadata,
+                      Column('place_id', String(60), ForeignKey('places.id'),
+                             nullable=False),
+                      Column('amenity_id', String(60), ForeignKey
+                             ('amenities.id'), nullable=False))
 
 class Place(BaseModel, Base):
     """This is the class for Place
@@ -33,14 +38,34 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, default=0, nullable=False)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
-    amenity_iss = []
+    amenity_ids = []
     reviews = relationship('Review', backref='place')
+    amenities = relationship("Amenity", secondary=place_amenity,
+                             viewonly=False, backref='place_amenities')
 
     @property
     def reviews(self):
+        """ get the reviews to filestorage option """
         comentarios = []
         all_data = models.storage.all(models.Review)
         for key, value in all_data.items():
             if value.place_id == self.id:
                 comentarios.append(value)
         return comentarios
+
+    @property
+    def amenities(self):
+        """ get the amenities """
+        comodidades = []
+        all_data = models.storage.all(models.Amenity)
+        for key, value in all_data.items():
+            for amenity in self.amenity_ids:
+                if value.id == amenity:
+                    comodidades.append(value.id)
+        return comodidades
+
+    @amenities.setter
+    def amenities(self, obj):
+        """ set the amenities ids """
+        if type(obj) is Amenity:
+            amenity_ids.append(obj.id)
