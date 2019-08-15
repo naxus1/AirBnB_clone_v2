@@ -54,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
                 elif value.replace('.', '', 1).isdigit():
                     value = float(value)
                 else:
-                    value = value.replace('-', ' ')
+                    value = value.replace('_', ' ')
                     value = value[1:-1]
                 setattr(obj, key, value)
 
