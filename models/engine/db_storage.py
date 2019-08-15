@@ -26,7 +26,7 @@ class DBStorage():
 
     __engine = None
     __session = None
-    all_classes = [City, State, User]
+    all_classes = [City, State, User, Place]
 
     def __init__(self):
         """ the init method to start the engine db
@@ -37,7 +37,7 @@ class DBStorage():
                                              pool_pre_ping=True))
         metadata = MetaData()
         if HBNB_ENV == "test":
-            metadata.drop_all(engine)
+            metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """ bring all the clases from the database acoord to the cls type
