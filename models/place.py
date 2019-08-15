@@ -2,7 +2,7 @@
 """This is the place class"""
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
-
+import models
 
 class Place(BaseModel, Base):
     """This is the class for Place
@@ -31,3 +31,4 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, default=0, nullable=False)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
+    amenity_iss = []
