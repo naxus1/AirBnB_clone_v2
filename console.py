@@ -55,6 +55,7 @@ class HBNBCommand(cmd.Cmd):
             result = ar.split("=")
             key = result[0]
             value = result[1].replace('_', ' ')
+            value = value[1:-1]
             if value.isdigit():
                 value = int(value)
             elif value.replace('.', '', 1).isdigit():

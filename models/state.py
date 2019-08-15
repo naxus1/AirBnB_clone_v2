@@ -13,17 +13,17 @@ class State(BaseModel, Base):
         name: input name
     """
 
-    __tablename__ = "states"
+    __tablename__ = 'states'
 
     name = Column(String(128),
                   nullable=False)
 
-    cities = relationship("City",
-                          backref="state",
-                          cascade="all, delete-orphan")
+    cities = relationship('City',
+                          cascade="all, delete-orphan", backref="state")
+
     @property
     def cities(self):
-        all_data = models.storage.all(models.city)
+        all_data = models.storage.all(models.City)
         data_city = []
         for key, value in all_data.items():
             if value.state_id == self.id:

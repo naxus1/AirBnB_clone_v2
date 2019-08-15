@@ -2,7 +2,6 @@
 """This is the base model class for AirBnB"""
 import uuid
 import models
-#Import datatime and Datetime
 import datetime
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime
