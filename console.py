@@ -38,31 +38,33 @@ class HBNBCommand(cmd.Cmd):
             SyntaxError: when there is no arg given
             NameError: when there is no object taht has the name
         """
-        if not arg:
+
+        try:
+            if not arg:
+                raise SyntaxError()
+            my_list = arg.split(" ")
+            obj = eval("{}()".format(my_list[0]))
+
+            for ar in my_list[1:]:
+                result = ar.split("=")
+                key = result[0]
+                value = result[1]
+                if value.isdigit():
+                    value = int(value)
+                elif value.replace('.', '', 1).isdigit():
+                    value = float(value)
+                else:
+                    value = value.replace('-', ' ')
+                    value = value[1:-1]
+                setattr(obj, key, value)
+
+            obj.save()
+            print("{}".format(obj.id))
+
+        except SyntaxError:
             print("** class name missing **")
-            return
-
-        arguments = arg.split()
-
-        if arguments[0] not in self.all_classes:
+        except NameError:
             print("** class doesn't exist **")
-            return
-
-        obj = eval(arguments[0])()
-
-        for ar in arguments[1:]:
-            result = ar.split("=")
-            key = result[0]
-            value = result[1].replace('_', ' ')
-            value = value[1:-1]
-            if value.isdigit():
-                value = int(value)
-            elif value.replace('.', '', 1).isdigit():
-                value = float(value)
-            setattr(obj, key, value)
-
-        obj.save()
-        print("{}".format(obj.id))
 
     def do_show(self, line):
         """Prints the string representation of an instance
@@ -145,6 +147,7 @@ class HBNBCommand(cmd.Cmd):
                 raise NameError()
             for key in objects:
                 name = key.split('.')
+                print(name[0] + args[0])
                 if name[0] == args[0]:
                     my_list.append(objects[key])
             print(my_list)
