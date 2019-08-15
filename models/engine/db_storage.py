@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-
+"""The engine of alchemy to conect the mysql
+"""
 
 from os import getenv
 from models.base_model import BaseModel, Base
@@ -25,7 +26,7 @@ class DBStorage():
 
     __engine = None
     __session = None
-    all_classes = [City, State]
+    all_classes = [City, State, User]
 
     def __init__(self):
         """ the init method to start the engine db

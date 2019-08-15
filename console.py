@@ -51,7 +51,6 @@ class HBNBCommand(cmd.Cmd):
         obj = eval(arguments[0])()
 
         for ar in arguments[1:]:
-            print(ar)
             result = ar.split("=")
             key = result[0]
             value = result[1].replace('_', ' ')
