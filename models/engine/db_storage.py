@@ -26,7 +26,7 @@ class DBStorage():
 
     __engine = None
     __session = None
-    all_classes = [City, State, User, Place]
+    all_classes = [City, State, User, Place, Review]
 
     def __init__(self):
         """ the init method to start the engine db
