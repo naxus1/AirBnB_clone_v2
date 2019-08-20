@@ -14,45 +14,43 @@ if [ -e $file ]
 then
     true
 else
-    mkdir $file
+    sudo mkdir $file
 fi
 file="/data/web_static/"
 if [ -e $file ]
 then
     true
 else
-    mkdir $file
+    sudo mkdir $file
 fi
 file="/data/web_static/releases/"
 if [ -e $file ]
 then
     true
 else
-    mkdir $file
+    sudo mkdir $file
 fi
 file2="/data/web_static/shared/"
 if [ -e $file2 ]
 then
     true
 else
-    mkdir $file2
+    sudo mkdir $file2
 fi
 file="/data/web_static/releases/test/"
 if [ -e $file ]
 then
     true
 else
-    mkdir $file
+    sudo mkdir $file
 fi
-echo -e "<html>\n\t<body>\n\t<h1>Esto es una prueba</h1>\n\t</body>\n</html>" > /data/web_static/releases/test/index.html
+sudo echo -e "<html>\n\t<body>\n\t<h1>Esto es una prueba</h1>\n\t</body>\n</html>" | sudo tee -a /data/web_static/releases/test/index.html
 file_current=/data/web_static/current
 if [ -e $file_current ]
 then
-    rm $file_current
-    ln -s $file $file_current
-else
-    ln -s $file $file_current
+    sudo rm $file_current
 fi
-chown -R ubuntu:ubuntu /data/
-sed -i "56i\\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}" /etc/nginx/sites-available/default
-service nginx restart
+sudo ln -s $file $file_current
+sudo chown -R ubuntu:ubuntu /data/
+sudo sed -i "56i\\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}" /etc/nginx/sites-available/default
+sudo service nginx restart
