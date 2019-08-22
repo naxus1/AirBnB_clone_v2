@@ -1,17 +1,24 @@
 #!/usr/bin/python3
-""" module that compress in tgz """
 from fabric.api import local
+from datetime import datetime
+
+"""
+    This fabric script will generate a .tgz archive from web_static folder
+"""
 
 
 def do_pack():
-    """compress files """
+    """
+    do_pack: This function will convert the file into the .tgz format
+    running on local for contents in web_static
+    Return archive path if correctly generated or else return None
+    """
     local("mkdir -p versions")
-    file = local("tar -czvf \"versions/web_static_\
-                 $(date '+%Y%m%d%H%M%S').tgz\" web_static")
+    cur_time = datetime.now().strftime("%Y%m%d%H%M%S")
+    arch_name = "versions/web_static_{}.tgz".format(cur_time)
+    tgz_vert = local("tar -cvzf {} web_static".format(arch_name))
 
-    if (file.succeeded):
-        return local("echo \"versions/web_static_\
-                     $(date '+%Y%m%d%H%M%S').tgz\"")
+    if tgz_vert.succeeded:
+        return arch_name
     else:
-        print("none")
         return None
