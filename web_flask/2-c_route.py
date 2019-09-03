@@ -1,4 +1,4 @@
-#!/usr/bib/pyton3
+#!/usr/bin/pyton3
 """
 AirBnB python module
 """
