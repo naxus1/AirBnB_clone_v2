@@ -1,4 +1,4 @@
-#!/usr/bin/pyton3
+#!/usr/bin/phyton3
 """
 AirBnB python module
 """
