@@ -1,6 +1,6 @@
 #!/usr/bib/pyton3
 """
-AirBnB
+AirBnB python module
 """
 
 
@@ -40,4 +40,4 @@ def c(text):
 
 
 if __name__ == "__main__":
-    app.run(port=5000, host="0.0.0.0", debug=True)
+    app.run(port=5000, host="0.0.0.0")
