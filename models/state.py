@@ -6,14 +6,6 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
-#!/usr/bin/python3
-"""This is the state class"""
-
-import models
-from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey
-from sqlalchemy.orm import relationship
-
 
 class State(BaseModel, Base):
     """This is the class for State
