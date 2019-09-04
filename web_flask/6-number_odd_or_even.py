@@ -4,7 +4,7 @@ AirBnB
 """
 
 
-from flask import Flask, abort
+from flask import Flask, abort, render_template
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -71,14 +71,6 @@ def number_template(n):
     Returns:
        str: n is a number
     """
-    if n.isdigit() == 1:
-        return render_template("5-number.html", n=n)
-    else:
-        abort(404)
-
-
-@app.route("/number_template/<n>")
-def number_template(n):
     if n.isdigit() == 1:
         return render_template("5-number.html", n=n)
     else:
