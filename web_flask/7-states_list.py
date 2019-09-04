@@ -1,29 +1,28 @@
 #!/usr/bin/python3
-from flask import Flask, abort, render_template
+from flask import Flask, render_template
 from models import storage
+from models.state import State
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
-
 @app.route('/states_list')
-def list_state():
+def states_list():
+    """display a HTML page with a list of states
+    Returns:
+        str: rendered html
     """
-    Comment
-    """
-    states = []
-    for key, state in storage.all("State").items():
-        states.append({'id': state.id, 'name': state.name})
-    return render_template("7-states_list.html", states=states)
+    return render_template("7-states_list.html", states=storage.all(State))
 
 
 @app.teardown_appcontext
-def teardown_storage(self):
-    """
-    Comment
+def teardown(exc):
+    """called after each request
+    Args:
+        exc (Exception): unknown, seems necessary based on docu
     """
     storage.close()
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(port=5000, host="0.0.0.0")
